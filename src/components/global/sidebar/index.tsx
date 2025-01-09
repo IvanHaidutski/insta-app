@@ -26,7 +26,7 @@ const Sidebar = ({ slug }: Props) => {
   lg:inline-block
   border-[#545454]
   bg-gradient-to-b from-[#768BDD] via-[#171717] to-[#768BDD] 
-  hiddenфыв 
+  hidden
   bottom-0 
   top-0 m-3 
   rounded-3xl 
