@@ -13,6 +13,8 @@ import { SubscriptionPlan } from "../subscription-plan";
 import UpgradeCard from "../sidebar/upgrade";
 import CreateAutomations from "../create-automations";
 import Search from "../search";
+import Notifications from "../notifications";
+import MainBreadCrumb from "../main-bread-crumb";
 
 type Props = {
   slug: string;
@@ -72,7 +74,9 @@ const Navbar = ({ slug }: Props) => {
           </span>
           <Search />
           <CreateAutomations />
+          <Notifications />
         </div>
+        <MainBreadCrumb page={page === slug ? "Home" : page} slug={slug} />
       </div>
     )
   );

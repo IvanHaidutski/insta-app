@@ -3,12 +3,12 @@ import { AutomationDuoToneWhite } from "@/icons/automation-duotone-white";
 import { HomeDuoToneWhite } from "@/icons/home-duo-tone-white";
 import { v4 as uuid } from "uuid";
 
-type FieldProps = {
+export type FieldProps = {
   label: string;
   id: string;
 };
 
-type SideBarProps = {
+export type SideBarProps = {
   icon: React.ReactNode;
 } & FieldProps;
 
