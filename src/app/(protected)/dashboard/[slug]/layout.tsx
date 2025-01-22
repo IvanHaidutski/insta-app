@@ -25,6 +25,7 @@ const Layout = ({ children, params }: Props) => {
       overflow-auto"
       >
         <Infobar slug={params.slug} />
+        {children}
       </div>
     </div>
   );
