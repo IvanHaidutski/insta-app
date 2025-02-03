@@ -1,4 +1,5 @@
 "use client";
+
 import { usePaths } from "@/hooks/user-nav";
 import { LogoSmall } from "@/svgs/logo-small";
 import React from "react";
