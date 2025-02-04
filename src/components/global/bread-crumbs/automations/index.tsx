@@ -1,11 +1,15 @@
 import { PencilDuoToneBlack } from "@/icons";
 import { ChevronRight, Pencil } from "lucide-react";
 import React from "react";
+import ActivateAutomationButton from "../../activate-automation-button";
 
-type Props = {};
+type Props = {
+  id: string;
+};
 
-const AutomationsBreadCrumb = (props: Props) => {
-  //WIP: get the automation data
+const AutomationsBreadCrumb = ({ id }: Props) => {
+  //WIP: fetch the automation data
+  //User mutation stuff to update the automations
   return (
     <div className="rounded-full w-full p-5 bg-[#18181B1A] flex items-center">
       <div className="flex items-center gap-x-3 min-w-0">
@@ -29,11 +33,9 @@ const AutomationsBreadCrumb = (props: Props) => {
           <p className="text-text-secondary text-sm truncate min-w-0">
             Changes Saved
           </p>
-          <p className="text-text-secondary text-sm truncate min-w-0">
-            Undo | Redo
-          </p>
         </div>
       </div>
+      <ActivateAutomationButton />
     </div>
   );
 };
