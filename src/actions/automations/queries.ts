@@ -2,7 +2,7 @@
 
 import { client } from "@/lib/prisma";
 
-export const createAutomations = async (clerkId: string) => {
+export const createAutomation = async (clerkId: string) => {
   return await client.user.update({
     where: {
       clerkId,
@@ -10,6 +10,25 @@ export const createAutomations = async (clerkId: string) => {
     data: {
       automations: {
         create: {},
+      },
+    },
+  });
+};
+
+export const getAutomations = async (clerkId: string) => {
+  return await client.user.findUnique({
+    where: {
+      clerkId,
+    },
+    select: {
+      automations: {
+        orderBy: {
+          createdAt: "asc",
+        },
+        include: {
+          keywords: true,
+          listener: true,
+        },
       },
     },
   });
