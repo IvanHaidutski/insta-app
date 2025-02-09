@@ -19,8 +19,8 @@ export const getAllAutomations = async () => {
   try {
     const automations = await getAutomations(user.id);
     if (automations) return { status: 200, data: automations.automations };
-    return { status: 400 };
+    return { status: 400, data: [] };
   } catch (error) {
-    return { status: 500 };
+    return { status: 500, data: [] };
   }
 };
