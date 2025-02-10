@@ -8,9 +8,13 @@ import GradientButton from "../gradient-button";
 import { Button } from "@/components/ui/button";
 import { useQueryAutomations } from "@/hooks/user-queries";
 import CreateAutomations from "../create-automations";
+import { useMutationDataState } from "@/hooks/use-mutation-data";
 
 const AutomationList = () => {
   const { data } = useQueryAutomations();
+
+  const { latestVariable } = useMutationDataState(["create-automation"]);
+  console.log(latestVariable);
 
   const { pathname } = usePaths();
 
@@ -69,16 +73,18 @@ const AutomationList = () => {
                 : `${automation.createdAt.getUTCDate()}th`}{" "}
               {automation.createdAt.getUTCFullYear()}
             </p>
-            {/* Render the button based on the listener */}
-            <GradientButton
-              type="BUTTON"
-              className="w-full bg-background-80 text-white hover:bg-background-80"
-            >
-              Smart AI
-            </GradientButton>
-            <Button className="bg-background-80 hover:bg-background-80 text-white">
-              Standart
-            </Button>
+            {automation.listener?.listener === "SMARTAI" ? (
+              <GradientButton
+                type="BUTTON"
+                className="w-full bg-background-80 text-white hover:bg-background-80"
+              >
+                Smart AI
+              </GradientButton>
+            ) : (
+              <Button className="bg-background-80 hover:bg-background-80 text-white">
+                Standart
+              </Button>
+            )}
           </div>
         </Link>
       ))}
