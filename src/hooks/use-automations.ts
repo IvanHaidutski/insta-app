@@ -1,6 +1,6 @@
 import { createAutomations, updateAutomationName } from "@/actions/automations";
 import { useMutationData } from "./use-mutation-data";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const useCreateAutomation = (id?: string) => {
   const { isPending, mutate } = useMutationData(
@@ -25,12 +25,30 @@ export const useEditAutomation = (automationId: string) => {
     disableEdit
   );
 
-function handleClickOutside(this: Document, event: MouseEvent){
-  if (
-    inputRef.current && !inputRef.current.contains(event.target as Node | null)
-  ){
-    if
-  }
-}
+  useEffect(() => {
+    function handleClickOutside(this: Document, event: MouseEvent) {
+      if (
+        inputRef.current &&
+        !inputRef.current.contains(event.target as Node | null)
+      ) {
+        if (inputRef.current.value !== "") {
+          mutate({ name: inputRef.current.value });
+        } else {
+          disableEdit();
+        }
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
+  return {
+    edit,
+    enableEdit,
+    disableEdit,
+    inputRef,
+    isPending,
+  };
 };

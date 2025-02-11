@@ -4,6 +4,9 @@ import { ChevronRight, Pencil } from "lucide-react";
 import React from "react";
 import ActivateAutomationButton from "../../activate-automation-button";
 import { useQueryAutomation } from "@/hooks/user-queries";
+import { useEditAutomation } from "@/hooks/use-automations";
+import { useMutationDataState } from "@/hooks/use-mutation-data";
+import { Input } from "@/components/ui/input";
 
 type Props = {
   id: string;
@@ -13,7 +16,9 @@ const AutomationsBreadCrumb = ({ id }: Props) => {
   //WIP: fetch the automation data
   //User mutation stuff to update the automations
   const { data } = useQueryAutomation(id);
-  const {} = useEditAutomation(id);
+  const { edit, enableEdit, inputRef, isPending } = useEditAutomation(id);
+
+  const { latestVariable } = useMutationDataState(["update-automations"]);
 
   return (
     <div className="rounded-full w-full p-5 bg-[#18181B1A] flex items-center">
@@ -21,10 +26,18 @@ const AutomationsBreadCrumb = ({ id }: Props) => {
         <p className="text-[#9B9CA0] truncate">Automations</p>
         <ChevronRight className="flex-shrink-0" color="#9B9CA0" />
         <span className="flex gap-x-3 items-center min-w-0">
-          {/* WIP: Show the editing data */}
-          <p className="text-[#9B9CA0] truncate">
-            This is the automation title
-          </p>
+          {edit ? (
+            <Input
+              ref={inputRef}
+              placeholder={
+                isPending ? latestVariable.variables : "Add a new name"
+              }
+              className="bg-transparent h-auto outline-none text-base border-none p-0"
+            />
+          ) : (
+            <p className="text-[#9B9CA0] truncate">{data?.data?.name}</p>
+          )}
+
           <span className="cursor-pointer hover:opacity-75 duration-100 transition flex-shrink-0">
             <Pencil size={14} />
           </span>
