@@ -1,7 +1,9 @@
-import { PencilDuoToneBlack } from "@/icons";
+"use client";
+
 import { ChevronRight, Pencil } from "lucide-react";
 import React from "react";
 import ActivateAutomationButton from "../../activate-automation-button";
+import { useQueryAutomation } from "@/hooks/user-queries";
 
 type Props = {
   id: string;
@@ -10,6 +12,9 @@ type Props = {
 const AutomationsBreadCrumb = ({ id }: Props) => {
   //WIP: fetch the automation data
   //User mutation stuff to update the automations
+  const { data } = useQueryAutomation(id);
+  const {} = useEditAutomation(id);
+
   return (
     <div className="rounded-full w-full p-5 bg-[#18181B1A] flex items-center">
       <div className="flex items-center gap-x-3 min-w-0">
