@@ -30,17 +30,28 @@ const AutomationsBreadCrumb = ({ id }: Props) => {
             <Input
               ref={inputRef}
               placeholder={
-                isPending ? latestVariable.variables : "Add a new name"
+                isPending ? latestVariable?.variables : "Add a new name"
               }
               className="bg-transparent h-auto outline-none text-base border-none p-0"
             />
           ) : (
-            <p className="text-[#9B9CA0] truncate">{data?.data?.name}</p>
+            <p className="text-[#9B9CA0] truncate">
+              {latestVariable?.variables
+                ? latestVariable?.variables.name
+                : data?.data?.name}
+            </p>
           )}
 
-          <span className="cursor-pointer hover:opacity-75 duration-100 transition flex-shrink-0">
-            <Pencil size={14} />
-          </span>
+          {edit ? (
+            <></>
+          ) : (
+            <span
+              className="cursor-pointer hover:opacity-75 duration-100 transition flex-shrink-0"
+              onClick={enableEdit}
+            >
+              <Pencil size={14} />
+            </span>
+          )}
         </span>
       </div>
       <div className="flex items-center gap-x-5 ml-auto">
