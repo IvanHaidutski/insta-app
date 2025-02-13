@@ -1,7 +1,7 @@
 import React from "react";
 
 type Props = {
-  children: React.ReactNode;
+  children: React.ReactNode; //React.ReactNode - это данные любого типа, например кусок jsx кода
 };
 
 const Layout = ({ children }: Props) => {

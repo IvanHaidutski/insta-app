@@ -1,3 +1,5 @@
+//В этой папке записываются все функции, которые касаются пользователя и выполняются на сервере
+
 "use server";
 
 import { currentUser } from "@clerk/nextjs/server";
@@ -6,13 +8,31 @@ import { createUser, findUser } from "./queries";
 import { refreshToken } from "@/lib/fetch";
 import { updateIntegrations } from "../integrations/queries";
 
+//Фунция ниже проверяет или пользователь авторизирован
 export const onCurrentUser = async () => {
-  const user = await currentUser();
-  if (!user) return redirect("/sign-in");
+  const user = await currentUser(); //Получение текущего юзера с помощью ф-и из Clerk
+  if (!user) return redirect("/sign-in"); //Если юзер не найден, перенаправление на страницу авторизации
 
   return user;
-};
+}; 
+  //Ф-я возвращает текущего юзера. 
+  // {
+  //   "id": "user_abc123",
+  //   "firstName": "Ivan",
+  //   "lastName": "Petrov",
+  //   "primaryEmailAddressId": "email_456",
+  //   "emailAddresses": [
+  //     { "id": "email_456", "emailAddress": "ivan@example.com" }
+  //   ],
+  //   "username": "ivan_p",
+  //   "imageUrl": "https://clerk.dev/avatar.png",
+  //   "publicMetadata": {},
+  //   "privateMetadata": {},
+  //   "createdAt": "2024-02-14T10:00:00Z"
+  // }
 
+
+//Что делает следующая функция?
 export const onBoardUser = async () => {
   const user = await onCurrentUser();
   try {
